@@ -1,0 +1,21 @@
+# Interface no Streamlit
+st.title("Segmentos de Mercado Interativo")
+st.write("Preencha as caixas para cada segmento de mercado.")
+
+# Dicionário para armazenar os inputs
+inputs = {}
+
+for segment in segments:
+    with st.expander(segment):
+        box1 = st.text_input(f"{segment} - Campo 1", key=f"{segment}_box1")
+        box2 = st.text_input(f"{segment} - Campo 2", key=f"{segment}_box2")
+        inputs[segment] = (box1, box2)
+
+# Desenhar o grafo
+fig, ax = plt.subplots(figsize=(14, 10))
+nx.draw(G, pos, with_labels=True, node_color='lightblue', edge_color='gray', font_size=8, font_weight='bold')
+st.pyplot(fig)
+
+# Mostrar os inputs preenchidos
+st.write("### Dados Preenchidos:")
+st.write(inputs)
